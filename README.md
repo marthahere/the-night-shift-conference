@@ -40,6 +40,10 @@ npm run preview
 
 There is no backend, no login, no API, and no environment setup beyond installing dependencies.
 
+## Deploying to GitHub Pages
+
+The GitHub Actions workflow builds and deploys the site when changes are pushed to `main`. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The site will be available at `https://marthahere.github.io/the-night-shift/` after the workflow succeeds.
+
 ## Using it
 
 1. The page opens on Day 1.
