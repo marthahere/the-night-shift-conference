@@ -1,0 +1,263 @@
+:root {
+  --bg: #1a1033;
+  --surface: #261848;
+  --surface-hover: #31205a;
+  --line: #3b2a68;
+  --text: #f3eefc;
+  --muted: #bfb2e0;
+  --lavender: #b99cff;
+  --blue: #6ea0ff;
+  --cyan: #4fe3f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+/* Visible focus for every interactive element */
+:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* The header and the main content share the same width, left aligned */
+.header,
+main {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main {
+  padding-bottom: 3rem;
+}
+
+
+/* ---------- Header ---------- */
+.header {
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.15;
+}
+
+.tagline {
+  margin: 0;
+  color: #cbb5ff;
+  font-weight: normal;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+
+.description {
+  margin: 0.75rem 0 0;
+  color: #b4a9cb;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
+
+.online {
+  display: inline-block;
+  margin: 1rem 0 0;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ---------- Day selector ---------- */
+.days {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.day-button {
+  padding: 0.6rem 1.5rem;
+  border: 2px solid var(--lavender);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.day-button[aria-pressed="true"] {
+  background: var(--lavender);
+  color: var(--bg);
+  font-weight: bold;
+}
+
+.divider {
+  margin: 1.5rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Schedule ---------- */
+/* Each row is one time slot. On narrow screens the time sits above the cards. */
+.row {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.time {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.time strong {
+  font-size: 1.125rem;
+}
+
+.time span {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.cards {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.track-titles {
+  display: none; /* shown on wide screens only, see below */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 1rem;
+  border: 0;
+  border-left: 6px solid var(--accent);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.card:hover {
+  background: var(--surface-hover);
+}
+
+.card-track {
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.card-description {
+  color: var(--muted);
+}
+
+.card-speaker {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Each track has its own accent color */
+.track-0 { --accent: var(--lavender); }
+.track-1 { --accent: var(--blue); }
+.track-2 { --accent: var(--cyan); }
+
+/* ---------- Wide screens: time on the left, three columns of cards ---------- */
+@media (min-width: 50rem) {
+  .row {
+    grid-template-columns: 7rem 1fr;
+    gap: 1.5rem;
+  }
+
+  .time {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .track-titles {
+    display: grid;
+    border-top: 0;
+    padding-bottom: 0;
+  }
+
+  .track-titles + .row {
+    border-top: 0;
+  }
+
+  .track-title {
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent);
+    font-size: 1.125rem;
+    font-weight: bold;
+  }
+}
+
+/* ---------- Session details dialog ---------- */
+.dialog {
+  width: min(32rem, calc(100% - 2rem));
+  padding: 1.5rem;
+  border: 2px solid var(--lavender);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.dialog::backdrop {
+  background: rgba(10, 5, 25, 0.8);
+}
+
+.dialog h2 {
+  margin-top: 0;
+  color: var(--lavender);
+  overflow-wrap: anywhere;
+}
+
+.dialog dt {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.dialog dd {
+  margin: 0 0 0.75rem;
+}
+
+.close-button {
+  padding: 0.6rem 1.5rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--cyan);
+  color: var(--bg);
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
