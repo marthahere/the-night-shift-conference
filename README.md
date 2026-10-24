@@ -42,7 +42,9 @@ There is no backend, no login, no API, and no environment setup beyond installin
 
 ## Deploying to GitHub Pages
 
-The GitHub Actions workflow builds and deploys the site when changes are pushed to `main`. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The site will be available at `https://marthahere.github.io/the-night-shift/` after the workflow succeeds.
+The GitHub Actions workflow builds and deploys the site when changes are pushed to `main`. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. After the workflow succeeds, open the URL shown for the `github-pages` environment in the deployment job.
+
+The build reads the site base path from GitHub Pages configuration, so its asset URLs stay correct if the repository is renamed or uses a custom domain. Use the deployment URL shown for the `github-pages` environment rather than relying on a hardcoded repository path.
 
 ## Using it
 
